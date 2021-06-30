@@ -2,5 +2,6 @@
   "readPath": "$String",
   "writePath": "$String",
   "dirName": "$String",
-  "css": "$String"
+  "css": "$String",
+  "packageName":"$String?"
 }

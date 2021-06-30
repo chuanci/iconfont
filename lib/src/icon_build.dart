@@ -129,6 +129,7 @@ class IconBuild {
       String ttfPath, String jsonPath, String savePath, String className) {
     var iconFontModel =
         IconModel.fromJson(json.decode(File(jsonPath).readAsStringSync()));
+    iconFontModel.package = config.packageName;
     String tmp = IconTemp.build(Utils.formatName(className), iconFontModel);
 
     if (iconFontModel.fontFamily != null) {

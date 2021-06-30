@@ -12,6 +12,7 @@ void main(List<String> args) {
     ..addOption('dir', abbr: 'd', defaultsTo: '', help: "自动生成的assets文件夹名")
     ..addOption('in',
         abbr: 'i', defaultsTo: 'assets/fonts/', help: "iconfont文件所在目录")
+    ..addOption('package', abbr: 'p', defaultsTo: '', help: "生成的字体包名")
     ..addOption('out', abbr: 'o', defaultsTo: 'lib/icons/', help: "生成后文件存放目录")
     ..addFlag('help', abbr: 'h', negatable: false, help: "help");
 
@@ -26,12 +27,14 @@ void main(List<String> args) {
     "writePath": "lib/icons/",
     "dirName": "",
     "css": "",
+    "package": ""
   });
 
   config.readPath = argResults['in'];
   config.writePath = argResults['out'];
   config.dirName = argResults['dir'];
   config.css = argResults['css'];
+  config.packageName = argResults['package'];
 
   try {
     IconBuild(config).build();

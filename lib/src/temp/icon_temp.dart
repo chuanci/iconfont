@@ -6,7 +6,8 @@ class IconTemp {
   /// build
   static String build(String className, IconModel model) {
     var itemContent = model.glyphs
-        ?.map((e) => _buildItem(model.cssPrefixText ?? "", e))
+        ?.map((e) =>
+            _buildItem(model.cssPrefixText ?? "", e, model.package != null))
         .join("\n");
 
     String contents = '''
@@ -17,6 +18,7 @@ import 'package:flutter/material.dart' show IconData;
 
 class $className {
   static const String _family = '${model.fontFamily}';
+  static const String? _package = '${model.package}';
   
   $className._();
   
@@ -28,14 +30,19 @@ $itemContent
   }
 
   /// _buildItem
-  static String _buildItem(String preText, IconModelGlyphs glyphs) {
+  static String _buildItem(
+      String preText, IconModelGlyphs glyphs, bool withPackage) {
     String iconName = Utils.formatName("${preText}${glyphs.fontClass}");
     String unicode = glyphs.unicode ?? "";
     String glyphsName = "";
+    String packageName = "";
     if (glyphs.name != null && glyphs.name!.isNotEmpty) {
       glyphsName = "// ${glyphs.name}";
     }
+    if (withPackage) {
+      packageName = ", fontPackage: _package";
+    }
 
-    return '''  static const IconData $iconName = IconData(0x$unicode, fontFamily: _family); $glyphsName''';
+    return '''  static const IconData $iconName = IconData(0x$unicode, fontFamily: _family$packageName); $glyphsName''';
   }
 }

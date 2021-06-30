@@ -4,5 +4,6 @@
   "font_family": "$String?",
   "css_prefix_text": "$String?",
   "description": "$String?",
+  "package":"$String?",
   "glyphs": "$List<IconModelGlyphs>?"
 }
